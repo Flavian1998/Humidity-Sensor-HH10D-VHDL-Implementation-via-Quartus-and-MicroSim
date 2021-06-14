@@ -57,7 +57,7 @@ Then, we can go to the I2C driver. How work a I2C driver ? First, we consider a 
 
 ![image](https://user-images.githubusercontent.com/82948794/121968052-d1cfff00-cd71-11eb-9160-18e511fa4ce0.png)
 
-
+The I2C_M master code (driver I2C) say how we can change state and when it is possible :
 
 
 
