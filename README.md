@@ -25,7 +25,7 @@ That traduces the the elements given in the data sheet :
 At this point, we have the keys to implement this C code into a VHDL one using I2C driver.
 To set up the comprehension and see what we will do next. As a drawing is better than a long speech, let us now represent the situation that will define the guideline of our project.
 
-![image](https://user-images.githubusercontent.com/82948794/121940252-2bbecd80-cd4e-11eb-8621-5c98a5dab048.png)
+![image](https://user-images.githubusercontent.com/82948794/121956579-96c5cf80-cd61-11eb-84b3-05ad37917e53.png)
 
 
 
