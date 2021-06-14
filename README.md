@@ -26,7 +26,7 @@ That traduces the the elements given in the data sheet :
 At this point, we have the keys to implement this C code into a VHDL one using I2C driver.
 To set up the comprehension and see what we will do next. As a drawing is better than a long speech, let us now represent the situation that will define the guideline of our project.
 
-![image](https://user-images.githubusercontent.com/82948794/121956579-96c5cf80-cd61-11eb-84b3-05ad37917e53.png)
+![image](https://user-images.githubusercontent.com/82948794/121969918-a818d700-cd75-11eb-8113-0c71c27b04e5.png)
 
 In this case, we can see the FGPA board which is composed by 2 blocks systems :
 - Bloc
@@ -57,7 +57,7 @@ Then, we can go to the I2C driver. How work a I2C driver ? First, we consider a 
 
 ![image](https://user-images.githubusercontent.com/82948794/121968052-d1cfff00-cd71-11eb-9160-18e511fa4ce0.png)
 
-The I2C_M master code (driver I2C) say how we can change state and when it is possible. We thus know when we have to reset, when the bus is ready to write information on sda, when the machine is able to receive or send datas etc.
+The I2C_M master code (driver I2C) say how we can change state and when it is possible. We thus know when we have to reset, when the bus is ready to write information on sda, when the machine is able to receive or send datas etc. We can see a part of the I2C driver given in Code VHDL Folder and called "I2C_M" just below.
 
 ![image](https://user-images.githubusercontent.com/82948794/121969260-30967800-cd74-11eb-952c-9be7ef9bdd36.png)
 
