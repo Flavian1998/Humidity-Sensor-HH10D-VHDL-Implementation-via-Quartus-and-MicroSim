@@ -71,7 +71,7 @@ All these variables are used to calculate the humidity rate (RH%) we search. We 
 After all these settings, we have to simulate the true behaviour of the all the installation.
 First, we have to join all the Inputs/Outputs of the system like the picture just below.
 
-![image](https://user-images.githubusercontent.com/82948794/121970315-908e1e00-cd76-11eb-94eb-2f664a541384.png)
+![image](https://user-images.githubusercontent.com/82948794/121970442-d77c1380-cd76-11eb-8538-24f5cdbb577d.png)
 
 
 
