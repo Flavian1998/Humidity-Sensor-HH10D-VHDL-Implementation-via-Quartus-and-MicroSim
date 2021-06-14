@@ -4,4 +4,5 @@ This page is composed in 4 sections :
 - VHDL Code, which takes in account all ".VHD" code used in the project
 - C Code, which regroups all ".C" codes that you will need 
 - Simulation, regroups Psim and Quartus code to implement
-- Documentation, xith all our sources and documents about I2C or Humidity Sensor HH10D
+- Documentation, with all our sources and documents about I2C or Humidity Sensor HH10D
+![image](https://user-images.githubusercontent.com/82948794/121933034-d4b4fa80-cd45-11eb-90df-b36d201fbf00.png)
