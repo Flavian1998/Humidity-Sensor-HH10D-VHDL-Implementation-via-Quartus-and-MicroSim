@@ -10,14 +10,24 @@ This project is composed in 4 sections :
 First, the main goal of the project is to implement a VHDL code driving in procol I2C that will return the value of humidity in the room. We use for that a HH10D humidity sensor (you can find its datasheet in the documentation section).
 To begin, we had on our disposal the C code of the project that we have to translate in VHDL. That code explains us how to use the datas presented in the datasheet and all inputs and outputs of the sensor and how they are used. 
 As a first step, let's unpack the first lines of our code and see how many parts it is divided into.
+
 ![image](https://user-images.githubusercontent.com/82948794/121937138-a71e8000-cd4a-11eb-86ee-1143e2f71473.png)
+
 This first lines represent the lecture of outputs of the sensor and inputs in the driver that we will explain later.
 The next part is composed by the C code responding at the demand of convert a pulse width given by the sensor in a humidity rate :
+
 ![image](https://user-images.githubusercontent.com/82948794/121937598-2318c800-cd4b-11eb-8655-020e14024a56.png)
 
 That traduces the the elements given in the data sheet :
 
 ![image](https://user-images.githubusercontent.com/82948794/121937446-fb296480-cd4a-11eb-9604-89a54184cefd.png)
+
+At this point, we have the keys to implement this C code into a VHDL one using I2C driver.
+To set up the comprehension and see what we will do next. As a drawing is better than a long speech, let us now represent the situation that will define the guideline of our project.
+
+![image](https://user-images.githubusercontent.com/82948794/121940252-2bbecd80-cd4e-11eb-8621-5c98a5dab048.png)
+
+
 
 
 
