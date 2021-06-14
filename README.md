@@ -14,7 +14,9 @@ As a first step, let's unpack the first lines of our code and see how many parts
 This first lines represent the lecture of outputs of the sensor and inputs in the driver that we will explain later.
 The next part is composed by the C code responding at the demand of convert a pulse width given by the sensor in a humidity rate :
 ![image](https://user-images.githubusercontent.com/82948794/121937598-2318c800-cd4b-11eb-8655-020e14024a56.png)
+
 That traduces the the elements given in the data sheet :
+
 ![image](https://user-images.githubusercontent.com/82948794/121937446-fb296480-cd4a-11eb-9604-89a54184cefd.png)
 
 
