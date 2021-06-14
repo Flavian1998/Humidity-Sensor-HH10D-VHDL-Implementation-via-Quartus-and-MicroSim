@@ -57,8 +57,9 @@ Then, we can go to the I2C driver. How work a I2C driver ? First, we consider a 
 
 ![image](https://user-images.githubusercontent.com/82948794/121968052-d1cfff00-cd71-11eb-9160-18e511fa4ce0.png)
 
-The I2C_M master code (driver I2C) say how we can change state and when it is possible :
+The I2C_M master code (driver I2C) say how we can change state and when it is possible. We thus know when we have to reset, when the bus is ready to write information on sda, when the machine is able to receive or send datas etc.
 
+![image](https://user-images.githubusercontent.com/82948794/121969260-30967800-cd74-11eb-952c-9be7ef9bdd36.png)
 
 
 
