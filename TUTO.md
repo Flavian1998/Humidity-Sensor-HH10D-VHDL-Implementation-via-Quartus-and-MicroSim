@@ -40,7 +40,7 @@ signed int16 lecdb_i2c(byte device, byte address, byte del) {
 ```
 
 This first lines represent the lecture of outputs of the sensor and inputs in the driver that we will explain later.
-The next part is composed by the C code responding at the demand of convert a pulse width given by the sensor in a humidity rate :
+The next part is composed by the C code "main.c" in the "C code" folder responding at the demand of convert a pulse width given by the sensor in a humidity rate :
 
 ```
 float lecture_HH10D() {
