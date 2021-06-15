@@ -1,7 +1,19 @@
 # Introduction #
 The main goal of the project is to read datas of a HH10D humidity sensor and transforms it into a humidity rate understable by everyone. To make you understand all our steps to arrive at this objective, we will discuss in this tuto about on our way of thinking and our comprehension of the subject. Follow us !
 
-#Humidity sensor HH10D#
+# Humidity sensor HH10D #
+
+We will start by discovering the sensor and its different outputs.
+
+![image](https://user-images.githubusercontent.com/82948794/121933034-d4b4fa80-cd45-11eb-90df-b36d201fbf00.png)
+
+The HH10D humidity sensor is constitued by 3 real outputs : 
+
+- Fout : this output gives us a signal that we have to treat to extract a frequency we will need to compile humidity rate (RH%)
+- SDA : it concerns 2 datas that we have to extract : sensitivity and offset that are also needed to find RH% and we will read them with the I2C protocol.
+- SCL : concerns the main clock of the system in an I2C protocol
+
+All explanations about I2C protocol 
 
 
 
@@ -89,14 +101,7 @@ In this case, we can see the FGPA board which is composed by 2 blocks systems :
 - Bloc
 - I2C Driver
 
-We will start by discovering the sensor and its different outputs
 
-![image](https://user-images.githubusercontent.com/82948794/121933034-d4b4fa80-cd45-11eb-90df-b36d201fbf00.png)
-
-The HH10D humidity sensor is constitued by 3 real outputs : 
-- Fout
-- SDA
-- SCL
 
 Indeed, the 2 others are linked with alimentation (VDD) and ground. They doenst communicate with the FGPA.
 
