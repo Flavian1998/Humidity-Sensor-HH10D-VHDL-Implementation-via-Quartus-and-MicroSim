@@ -42,7 +42,23 @@ signed int16 lecdb_i2c(byte device, byte address, byte del) {
 This first lines represent the lecture of outputs of the sensor and inputs in the driver that we will explain later.
 The next part is composed by the C code responding at the demand of convert a pulse width given by the sensor in a humidity rate :
 
-![image](https://user-images.githubusercontent.com/82948794/121937598-2318c800-cd4b-11eb-8655-020e14024a56.png)
+```
+float lecture_HH10D() {
+		int16 freq,sens,offset=0;
+		float humidity;
+
+		freq=us2hz(pulse_width);			// Mesure de la frequence
+		sens=lecdb_i2c(HH10D,0x0A,0);		// lecture de la sensibilit�
+		offset=lecdb_i2c(HH10D,0x0C,0);		// lecture de l'offset
+		
+		// Formule du capteur d'humidit� HH10D
+		// RH(%) = (offset-Freq)*sens/2^12
+    	humidity = offset - freq;
+    	humidity *= sens;
+    	humidity /= 4096.0;
+		return(humidity);
+}
+```
 
 That traduces the the elements given in the data sheet :
 
