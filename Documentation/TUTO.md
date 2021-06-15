@@ -15,15 +15,54 @@ The HH10D humidity sensor is constitued by 3 real outputs :
 
 All explanations about I2C protocol needed in the project are in the documentation folder [TutoI2C.md](Documentation/Project_Hardware_Software___Humidity_sensor___Tuto_I2C.pdf).
 
-The Fout output give us a square signal of a frequency we doesn't know but wich is includes in [5000 Hz;7500 Hz] as we can see in the datasheet of the sensor [HH10](Documentation/HH10D.pdf). To determine this frequency in VHDL, we have to compare it with a very high frequency we choose (here 1 MHz) . The goal of this counter is to compare how much times of the high frequency has a rising edge during a period of the frequency we search. This research value is the output of our counter.
+The Fout output give us a square signal of a frequency we doesn't know but wich is includes in [5000 Hz;7500 Hz] as we can see in the datasheet of the sensor [HH10](Documentation/HH10D.pdf). To determine this frequency in VHDL, we have to compare it with a very high frequency we choose (here 1 MHz) . The goal of this counter is to determine how much times of the high frequency has a rising edge during a period of the frequency we search. This researched value is the output of our counter.
 
-METTRE SCHEMA DES DEUX FREQUENCES ET DE LA PERIODE DE TEMPS ETUDIEE
+![image](https://user-images.githubusercontent.com/82948794/122133352-d3b2c480-ce3c-11eb-96df-1f6bae6dde47.png)
 
 # Implementation in VHDL and C #
+## Schematic of the project ##
 
-METTRE TON SCHEMA D'EXPLICATION DU PROJET
+![image](https://user-images.githubusercontent.com/82948794/122134408-ce567980-ce3e-11eb-8029-2d97a2aa38a5.png)
+
 
 From that schematic, we will implement first the counter called "cmpt.vhd" that will return a value (counter) we will use later in the .C code named "codeC.c" 
+
+
+As we have seen in the draw above, we have to use a high frequency clock of 1 MHz that will give us enough precision. But the basis clock is not at 1 MHz, so we have to divise the clock of the FPGA of 50 MHz into a clock of 1 MHz. We do that with a clock divider we can see in in our "cmpt.vhd" file.
+
+```
+-- Clock divider 50MHz to 1 MHz
+
+entity Clock_Divider is
+port ( clk,reset: in std_logic;
+i_clock_test: out std_logic);
+end Clock_Divider;
+
+architecture bhv of Clock_Divider is
+
+signal count: integer:=1;
+signal tmp : std_logic := '0';
+
+begin
+
+process(clk,reset)
+begin
+if(reset='1') then
+count<=1;
+tmp<='0';
+elsif(clk'event and clk='1') then
+count <=count+1;
+if (count = 50) then
+tmp <= NOT tmp;
+count <= 1;
+end if;
+end if;
+i_clk_test <= tmp;
+end process;
+end entity;
+```
+The rest of the code return us the counter with the same way that we explained before.
+
 Then, we get back to the sensor and see what it can bring us. We know that it still contains 2 important variables "offset" and "sensitivity" which are necessary to obtain the humidity rate. To attempt these values, we have to search in registries of the sensor the information we want. Then, we will do this search with an I2C protocol code named "I2C_M" that will extract "offset" and "sensitivity" and put them into registries we will use just after. 
 
 To end, we have put together all the previous important datas :
@@ -35,7 +74,7 @@ And implement it into the "codeC.c" that will return us the value of humidity ra
  
 # How to use these previous code with my FPGA and my board ? #
 
-
+You can find an explanation of that in documentation [tuto quartus](Documentation/Tuto Quartus.md)
 
 The main goal of the project is to implement a VHDL code driving in procol I2C that will return the value of humidity in the room. We use for that a HH10D humidity sensor (you can find its datasheet in the documentation section).
 To begin, we had on our disposal the C code of the project that we have to translate in VHDL. That code explains us how to use the datas presented in the datasheet and all inputs and outputs of the sensor and how they are used. 
