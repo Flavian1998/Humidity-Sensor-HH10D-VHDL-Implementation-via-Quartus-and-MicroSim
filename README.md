@@ -9,4 +9,4 @@ This project is composed in 4 sections :
 - And in the end, a "TUTO" presentation that explains the code process and regroup all our explanations.
 
 Disclaimer :
-Our "Bloc.vhd" has been taken from https://surf-vhdl.com/compute-frequency-clock/
+Our "cmpt.vhd" has been taken from https://surf-vhdl.com/compute-frequency-clock/
