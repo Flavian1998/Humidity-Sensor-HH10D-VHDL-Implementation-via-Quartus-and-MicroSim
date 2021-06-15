@@ -1,4 +1,4 @@
-# Humidity-Sensor-HH10D---VHDL-Implementation-via-Quartus-and-MicroSim
+# Humidity-Sensor-HH10D-VHDL-Implementation-via-Quartus-and-MicroSim
 Within the framework of the Hardware/Software course, given in Master 1 by Mr. Valaderrama at Faculty Polytechnic of Mons, we have to use a HH10D humidity sensor in order to make it work with a FGPA board following the I2C protocol. 
 In this project, we will familiar with the I2C bus, Quartus and MicroSim. In this case, we will implement a VHDL code to control a Humidity sensor HH10D
 This project is composed in 4 sections : 
