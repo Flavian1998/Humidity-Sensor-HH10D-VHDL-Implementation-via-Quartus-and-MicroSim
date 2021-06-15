@@ -48,10 +48,10 @@ float lecture_HH10D() {
 		float humidity;
 
 		freq=us2hz(pulse_width);			// Mesure de la frequence
-		sens=lecdb_i2c(HH10D,0x0A,0);		// lecture de la sensibilit�
+		sens=lecdb_i2c(HH10D,0x0A,0);		// lecture de la sensibility
 		offset=lecdb_i2c(HH10D,0x0C,0);		// lecture de l'offset
 		
-		// Formule du capteur d'humidit� HH10D
+		// Formule du capteur d'humidity HH10D
 		// RH(%) = (offset-Freq)*sens/2^12
     	humidity = offset - freq;
     	humidity *= sens;
@@ -86,15 +86,52 @@ Indeed, the 2 others are linked with alimentation (VDD) and ground. They doenst 
 
 The sensor has to return a value wich represent the pulse lengh as we saw above. 
 
-So, we have constructed a code around this pulse width.
-
+So, we have constructed a code around this pulse width. And we consider, in a first step, offset and sensibility needed to compile the humidity rate as constant and given by :
+- offset = 7500 (around max frequency of 7.5 kHz)
+- sens = 600
+```
 METTRE CODE COUNTER
-
+```
 After, we have to test this code with a "Test Bench". The Test Bench simulates the behaviour of the sensor in a case we choose and have to confirms our expectations.
 
-METTRE TEST BENCH COUNTER
+```
+entity cmpt_TB is
+end cmpt_TB;
+
+architecture tb of cmpt_TB is
+signal i_clk_ref            : std_logic;
+signal i_clk_test           : std_logic;
+signal i_rstb               : std_logic;
+signal o_clock_freq         : std_logic;
+
+constant T : time := 10e3 ns
+
+begin
+
+UUT : entity work.cmpt port map (i_clk_ref => i_clk_ref, i_clk_test => i_clk_test, o_clock_freq => o_clock_freq);
+
+i_clk_ref <= '1', '0' after 0.835e5 ns, '1' after 1.67e5 ns, '0' after 0.835e5 ns;
+
+-- clock of the process
+
+process
+begin
+i_clock_test <= '0';
+wait for T/2;
+i_clock_test <= '1';
+wait for T/2;
+end process;
+
+end tb;
+
+```
+The results of the test bench are given below :
+
+RESULTATs DU TEST BENCH 
 
 Then, we can go to the I2C driver. How work a I2C driver ? First, we consider a driver by its state machine. This means that we implement lines that explain the behaviour of the FPGA and how it has to go step by step. The following picture is quite interesting to understand the work of the driver.
+
+The I2C driver will find values of "offset" and "sensibility" that we considered as constant before.
 
 ![image](https://user-images.githubusercontent.com/82948794/121968052-d1cfff00-cd71-11eb-9160-18e511fa4ce0.png)
 
