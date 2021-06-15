@@ -1,0 +1,24 @@
+How to run a .vhd code in quartus and compile it ? 
+-Launch Quartus II-64bits
+-Create a VHDL projet: File → New Project Wizard → Click "Next"
+until the new project is created
+-Create a new file in the project
+-Paste the VHDL code
+-Save the file and the project
+-Compile (use the shortcut represented with a play symbol)
+
+How to realize a Test Bench ?
+-Create the VHDL Test Bench
+-Go to Assignement → Settings → General: Make sure that file in
+top-level entity correspond with the Test Bench
+-Go to Assignement → Settings → EDA Tool Settings → Simualtion :
+Make sure that the Tool name is Modelsim-Altera
+-Compile: Make sure that there aren’t any errors
+-Go to Tools → Run Simulation Tools → RTL simulation
+-Openning of Modelsim
+-Go to Compile → Compile → Check his own Test Bench
+-Go to Library Windows → work → our Test Bench → Architecture of
+our Test Bench
+-Objects Appearance
+-Select all the objects and add to a new wave
+-Select the simulation time and run
