@@ -127,7 +127,7 @@ end tb;
 ```
 The results of the test bench are given below :
 
-RESULTATs DU TEST BENCH 
+RESULTATS DU TEST BENCH 
 
 Then, we can go to the I2C driver. How work a I2C driver ? First, we consider a driver by its state machine. This means that we implement lines that explain the behaviour of the FPGA and how it has to go step by step. The following picture is quite interesting to understand the work of the driver.
 
