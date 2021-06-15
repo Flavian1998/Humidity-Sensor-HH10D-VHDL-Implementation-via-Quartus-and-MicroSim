@@ -1,4 +1,4 @@
-How to run a .vhd code in quartus and compile it ? 
+# How to run a .vhd code in quartus and compile it ? #
 -Launch Quartus II-64bits
 -Create a VHDL projet: File → New Project Wizard → Click "Next"
 until the new project is created
@@ -7,7 +7,7 @@ until the new project is created
 -Save the file and the project
 -Compile (use the shortcut represented with a play symbol)
 
-How to realize a Test Bench ?
+# How to realize a Test Bench ? #
 -Create the VHDL Test Bench
 -Go to Assignement → Settings → General: Make sure that file in
 top-level entity correspond with the Test Bench
@@ -22,3 +22,10 @@ our Test Bench
 -Objects Appearance
 -Select all the objects and add to a new wave
 -Select the simulation time and run
+
+# How to put the .c code on FPGA ? #
+
+- Open Putty 
+- Connect the processor of the FPGA (USB port in device manager)
+- Upload the executable file given in DEO_my_first_fgpa in the command windows using "prompt"
+- On putty you can now read the .c code and see the humidity rate
