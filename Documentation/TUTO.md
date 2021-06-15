@@ -13,7 +13,7 @@ The HH10D humidity sensor is constitued by 3 real outputs :
 - SDA : it concerns 2 datas that we have to extract : sensitivity and offset that are also needed to find RH% and we will read them with the I2C protocol.
 - SCL : concerns the main clock of the system in an I2C protocol
 
-All explanations about I2C protocol 
+All explanations about I2C protocol needed in the project are in the documentation folder [Documentation/TUTO.md].
 
 
 
