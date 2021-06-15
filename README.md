@@ -9,7 +9,40 @@ This project is composed in 4 sections :
 - And in the end, a "TUTO" presentation that explains the code process and regroup all our explanations.
 
 
+```
 
+//-------------Lecture  I2C------------------
+signed byte lec_i2c(byte device, byte address, byte del) {
+   signed BYTE data;
+
+   i2c_start();
+   i2c_write(device);
+   i2c_write(address);
+   if (del!=0) delay_ms(del);
+   i2c_start();
+   i2c_write(device | 1);
+   data=i2c_read(0);
+   i2c_stop();
+   return(data);
+}
+
+//-------------Lecture  I2C  2 bytes -----------------
+signed int16 lecdb_i2c(byte device, byte address, byte del) {
+   BYTE dataM,dataL;
+   int16 data;
+
+   i2c_start();
+   i2c_write(device);
+   i2c_write(address);
+   if (del!=0) delay_ms(del);
+   i2c_start();
+   i2c_write(device | 1);
+   dataM = i2c_read(1);				// Read MSB
+   dataL = i2c_read(0);				// Read LSB
+   i2c_stop();
+   data=((dataM*256)+dataL);		// True value
+   return(data);
+}
 
 
 
