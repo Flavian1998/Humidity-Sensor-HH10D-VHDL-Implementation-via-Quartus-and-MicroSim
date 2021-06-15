@@ -9,8 +9,10 @@ This project is composed in 4 sections :
 - And in the end, a "TUTO" presentation that explains the code process and regroup all our explanations.
 
 Disclaimer :
--Our "cmpt.vhd" has been taken from https://surf-vhdl.com/compute-frequency-clock/ and changed for our application
+
+- Our "cmpt.vhd" has been taken from https://surf-vhdl.com/compute-frequency-clock/ and changed for our application
 
 YouTube Videos :
--You will find a presentation video of the HH10D humidity sensor : https://youtu.be/j4jyPf-i3FE
--And an other video that explain review of the project : https://youtu.be/EtY4VtjoMBY
+
+- You will find a presentation video of the HH10D humidity sensor : https://youtu.be/j4jyPf-i3FE
+- And an other video that explain review of the project : https://youtu.be/EtY4VtjoMBY
