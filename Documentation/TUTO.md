@@ -15,15 +15,15 @@ The HH10D humidity sensor is constitued by 3 real outputs :
 
 All explanations about I2C protocol needed in the project are in the documentation folder [TutoI2C.md](Documentation/Project_Hardware_Software___Humidity_sensor___Tuto_I2C.pdf).
 
+The Fout output give us a square signal of a frequency we doesn't know but wich is includes in [5000 Hz;7500 Hz] as we can see in the datasheet of the sensor [HH10](Documentation/HH10D.pdf). To determine this frequency in VHDL, we have to compare it with a very high frequency we choose (here 1 MHz) . The goal of this counter is to compare times of the high frequency has a rising edge during a period of the frequency we search. 
 
+METTRE SCHEMA DES DEUX FREQUENCES ET DE LA PERIODE DE TEMPS ETUDIEE
 
+# Implementation in VHDL and C #
 
+METTRE TON SCHEMA D'EXPLICATION DU PROJET
 
-
-
-
-
-
+From that schematic, we will implement first the counter called "cmpt.vhd" that will return a value we will use later in the .C code named 
 
 
 The main goal of the project is to implement a VHDL code driving in procol I2C that will return the value of humidity in the room. We use for that a HH10D humidity sensor (you can find its datasheet in the documentation section).
