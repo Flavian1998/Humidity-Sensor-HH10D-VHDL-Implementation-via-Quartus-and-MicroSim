@@ -101,6 +101,17 @@ That tests the counter and show us what we want : a value for the counter.
 
 Then, we get back to the sensor and see what it can bring us. We know that it still contains 2 important variables "offset" and "sensitivity" which are necessary to obtain the humidity rate. To attempt these values, we have to search in registries of the sensor the information we want. Then, we will do this search with an I2C protocol code named "I2C_M" that will extract "offset" and "sensitivity" and put them into registries we will use just after. 
 
+Then, we can go to the I2C driver. How work a I2C driver ? First, we consider a driver by its state machine. This means that we implement lines that explain the behaviour of the FPGA and how it has to go step by step. The following picture is quite interesting to understand the work of the driver.
+
+The I2C driver will find values of "offset" and "sensibility" that we considered as constant before.
+
+![image](https://user-images.githubusercontent.com/82948794/121968052-d1cfff00-cd71-11eb-9160-18e511fa4ce0.png)
+
+The I2C_M master code (driver I2C) say how we can change state and when it is possible. We thus know when we have to reset, when the bus is ready to write information on sda, when the machine is able to receive or send datas etc. We can see a part of the I2C driver given in Code VHDL Folder and called "I2C_M" just below.
+
+![image](https://user-images.githubusercontent.com/82948794/121969260-30967800-cd74-11eb-952c-9be7ef9bdd36.png)
+
+
 To end, we have put together all the previous important datas :
 - Counter
 - Offset
@@ -151,17 +162,6 @@ If you cannot extract "offset" and "sensitivity" you can use it like parametres 
 - offset = 7500 (around max frequency of 7.5 kHz)
 - sens = 600
 
-
-
-Then, we can go to the I2C driver. How work a I2C driver ? First, we consider a driver by its state machine. This means that we implement lines that explain the behaviour of the FPGA and how it has to go step by step. The following picture is quite interesting to understand the work of the driver.
-
-The I2C driver will find values of "offset" and "sensibility" that we considered as constant before.
-
-![image](https://user-images.githubusercontent.com/82948794/121968052-d1cfff00-cd71-11eb-9160-18e511fa4ce0.png)
-
-The I2C_M master code (driver I2C) say how we can change state and when it is possible. We thus know when we have to reset, when the bus is ready to write information on sda, when the machine is able to receive or send datas etc. We can see a part of the I2C driver given in Code VHDL Folder and called "I2C_M" just below.
-
-![image](https://user-images.githubusercontent.com/82948794/121969260-30967800-cd74-11eb-952c-9be7ef9bdd36.png)
 
 All these variables are used to calculate the humidity rate (RH%) we search. We can see their implementation in the "compt.vhd" block.
 
