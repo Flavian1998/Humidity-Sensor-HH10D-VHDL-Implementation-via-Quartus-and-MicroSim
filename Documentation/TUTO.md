@@ -118,6 +118,19 @@ The I2C_M master code (driver I2C) say how we can change state and when it is po
 
 To test the I2C_M we found, we will work like in the previous code. That means simulate the information we could find in registries of the sensor withour link physically the sensor. We thus have to put adresses of registries of humidity sensor that are in the datasheet you can find in the documentation like that :
 
+![image](https://user-images.githubusercontent.com/82948794/122187905-c3780500-ce8f-11eb-88fe-90cdfa60f49d.png)
+
+And our code computes these adress :
+
+```
+
+	constant DEVICE	: std_logic_vector(6 downto 0):= "0000001";		-- the eeprom physical address     
+	constant ADDR		: std_logic_vector(7 downto 0):= "00000001";	
+	constant REGCONF : std_logic_vector(7 downto 0):= "01000010";	
+	constant REGRD : std_logic_vector(7 downto 0):= "01110010";
+
+```
+
 ## codeC ##
 
 To end, we have put together all the previous important datas :
