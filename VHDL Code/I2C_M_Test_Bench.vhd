@@ -4,10 +4,10 @@ use ieee.std_logic_unsigned.all;
 use ieee.numeric_std.all;
 USE ieee.math_real.ALL;
 
-entity I2C_M_S_RX_TB is
-end I2C_M_S_RX_TB;
+entity I2C_M_Test_Bench is
+end I2C_M_Test_Bench;
 
-architecture behavior of I2C_M_S_RX_TB is
+architecture behavior of I2C_M_Test_Bench is
 
 	constant clk_period	: time := 10 ns;
 	constant DATA_WITH	: integer := 8;
