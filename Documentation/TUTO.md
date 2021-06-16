@@ -63,6 +63,42 @@ end entity;
 ```
 The rest of the code return us the counter with the same way that we explained before.
 
+After, we have to test this code with a "Test Bench". The Test Bench simulates the behaviour of the sensor in a case we choose and have to confirms our expectations.
+
+```
+entity cmpt_TB is
+end cmpt_TB;
+
+architecture tb of cmpt_TB is
+signal i_clk_ref            : std_logic;
+signal i_clk_test           : std_logic;
+signal i_rstb               : std_logic;
+signal o_clock_freq         : std_logic;
+
+constant T : time := 10e3 ns
+
+begin
+
+UUT : entity work.cmpt port map (i_clk_ref => i_clk_ref, i_clk_test => i_clk_test, o_clock_freq => o_clock_freq);
+
+i_clk_ref <= '1', '0' after 0.835e5 ns, '1' after 1.67e5 ns, '0' after 0.835e5 ns;
+
+-- clock of the process
+
+process
+begin
+i_clock_test <= '0';
+wait for T/2;
+i_clock_test <= '1';
+wait for T/2;
+end process;
+
+end tb;
+
+```
+
+That tests the counter and show us what we want : a value for the counter.
+
 Then, we get back to the sensor and see what it can bring us. We know that it still contains 2 important variables "offset" and "sensitivity" which are necessary to obtain the humidity rate. To attempt these values, we have to search in registries of the sensor the information we want. Then, we will do this search with an I2C protocol code named "I2C_M" that will extract "offset" and "sensitivity" and put them into registries we will use just after. 
 
 To end, we have put together all the previous important datas :
@@ -72,13 +108,7 @@ To end, we have put together all the previous important datas :
 
 And implement it into the "codeC.c" that will return us the value of humidity rate.
  
-# How to use these previous code with my FPGA and my board ? #
-
-You can find an explanation of that in documentation [tuto quartus](Documentation/Tuto Quartus.md)
-
-The main goal of the project is to implement a VHDL code driving in procol I2C that will return the value of humidity in the room. We use for that a HH10D humidity sensor (you can find its datasheet in the documentation section).
-To begin, we had on our disposal the C code of the project that we have to translate in VHDL. That code explains us how to use the datas presented in the datasheet and all inputs and outputs of the sensor and how they are used. 
-As a first step, let's unpack the first lines of our code and see how many parts it is divided into.
+It will first have to read information in the registries of I2C_M :
 
 ```
 
@@ -117,88 +147,11 @@ signed int16 lecdb_i2c(byte device, byte address, byte del) {
 
 ```
 
-This first lines represent the lecture of outputs of the sensor and inputs in the driver that we will explain later.
-The next part is composed by the C code "main.c" in the "C code" folder responding at the demand of convert a pulse width given by the sensor in a humidity rate :
-
-```
-float lecture_HH10D() {
-		int16 freq,sens,offset=0;
-		float humidity;
-
-		freq=us2hz(pulse_width);			// Mesure de la frequence
-		sens=lecdb_i2c(HH10D,0x0A,0);		// lecture de la sensibility
-		offset=lecdb_i2c(HH10D,0x0C,0);		// lecture de l'offset
-		
-		// Formule du capteur d'humidity HH10D
-		// RH(%) = (offset-Freq)*sens/2^12
-    	humidity = offset - freq;
-    	humidity *= sens;
-    	humidity /= 4096.0;
-		return(humidity);
-}
-```
-
-That traduces the the elements given in the data sheet :
-
-![image](https://user-images.githubusercontent.com/82948794/121937446-fb296480-cd4a-11eb-9604-89a54184cefd.png)
-
-At this point, we have the keys to implement this C code into a VHDL one using I2C driver.
-To set up the comprehension and see what we will do next. As a drawing is better than a long speech, let us now represent the situation that will define the guideline of our project.
-
-![image](https://user-images.githubusercontent.com/82948794/121969918-a818d700-cd75-11eb-8113-0c71c27b04e5.png)
-
-In this case, we can see the FGPA board which is composed by 2 blocks systems :
-- Bloc
-- I2C Driver
-
-
-
-Indeed, the 2 others are linked with alimentation (VDD) and ground. They doenst communicate with the FGPA.
-
-The sensor has to return a value wich represent the pulse lengh as we saw above. 
-
-So, we have constructed a code around this pulse width. And we consider, in a first step, offset and sensibility needed to compile the humidity rate as constant and given by :
+If you cannot extract "offset" and "sensitivity" you can use it like parametres in the codeC.c 
 - offset = 7500 (around max frequency of 7.5 kHz)
 - sens = 600
-```
-METTRE CODE COUNTER
-```
-After, we have to test this code with a "Test Bench". The Test Bench simulates the behaviour of the sensor in a case we choose and have to confirms our expectations.
 
-```
-entity cmpt_TB is
-end cmpt_TB;
 
-architecture tb of cmpt_TB is
-signal i_clk_ref            : std_logic;
-signal i_clk_test           : std_logic;
-signal i_rstb               : std_logic;
-signal o_clock_freq         : std_logic;
-
-constant T : time := 10e3 ns
-
-begin
-
-UUT : entity work.cmpt port map (i_clk_ref => i_clk_ref, i_clk_test => i_clk_test, o_clock_freq => o_clock_freq);
-
-i_clk_ref <= '1', '0' after 0.835e5 ns, '1' after 1.67e5 ns, '0' after 0.835e5 ns;
-
--- clock of the process
-
-process
-begin
-i_clock_test <= '0';
-wait for T/2;
-i_clock_test <= '1';
-wait for T/2;
-end process;
-
-end tb;
-
-```
-The results of the test bench are given below :
-
-RESULTATS DU TEST BENCH 
 
 Then, we can go to the I2C driver. How work a I2C driver ? First, we consider a driver by its state machine. This means that we implement lines that explain the behaviour of the FPGA and how it has to go step by step. The following picture is quite interesting to understand the work of the driver.
 
@@ -221,3 +174,11 @@ After all these settings, we have to simulate the true behaviour of the all the 
 First, we have to join all the Inputs/Outputs of the system like the picture just below.
 
 ![image](https://user-images.githubusercontent.com/82948794/121970491-f11d5b00-cd76-11eb-87ff-1a47bd5ff636.png)
+
+
+# How to use these previous code with my FPGA and my board ? #
+
+You can find an explanation of that in documentation [Tuto Quartus-ModelSim-Putty](Documentation/Tuto Quartus-ModelSim-Putty.md)
+
+
+
