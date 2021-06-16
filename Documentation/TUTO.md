@@ -13,9 +13,9 @@ The HH10D humidity sensor is constitued by 3 real outputs :
 - SDA : it concerns 2 datas that we have to extract : sensitivity and offset that are also needed to find RH% and we will read them with the I2C protocol.
 - SCL : concerns the main clock of the system in an I2C protocol
 
-All explanations about I2C protocol needed in the project are in the documentation folder [TutoI2C.md](Documentation/Project_Hardware_Software___Humidity_sensor___Tuto_I2C.pdf).
+All explanations about I2C protocol needed in the project are in this link : https://forum.digikey.com/t/i2c-master-vhdl/12797. It explains you the Master/Slave communication via I2C work and you will understand more it by look at our I2C_M in the section "State Machine". That describes all the same steps that is shown in the link.
 
-The Fout output give us a square signal of a frequency we doesn't know but wich is includes in [5000 Hz;7500 Hz] as we can see in the datasheet of the sensor [HH10](Documentation/HH10D.pdf). To determine this frequency in VHDL, we have to compare it with a very high frequency we choose (here 1 MHz) . The goal of this counter is to determine how much times of the high frequency has a rising edge during a period of the frequency we search. This researched value is the output of our counter.
+The Fout output give us a square signal of a frequency we doesn't know but wich is includes in [5000 Hz;7500 Hz] (it is the ref signal) as we can see in the datasheet of the sensor [HH10](Documentation/HH10D.pdf). To determine this frequency in VHDL, we have to compare it with a very high frequency we choose (here 1 MHz, the test signal) . The goal of this counter is to determine how much times of the high frequency has a rising edge during a period of the frequency we search. This researched value is the output of our counter.
 
 ![image](https://user-images.githubusercontent.com/82948794/122133352-d3b2c480-ce3c-11eb-96df-1f6bae6dde47.png)
 
