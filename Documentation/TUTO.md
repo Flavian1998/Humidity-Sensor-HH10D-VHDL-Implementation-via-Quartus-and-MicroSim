@@ -116,7 +116,9 @@ The I2C_M master code (driver I2C) say how we can change state and when it is po
 
 ## I2C_M_Test_Bench ##
 
-To test the I2C_M we found, we will do like in the previous 
+To test the I2C_M we found, we will work like in the previous code. That means simulate the information we could find in registries of the sensor withour link physically the sensor. We thus have to put adresses of registries of humidity sensor that are in the datasheet you can find in the documentation like that :
+
+## codeC ##
 
 To end, we have put together all the previous important datas :
 - Counter
@@ -169,10 +171,8 @@ If you cannot extract "offset" and "sensitivity" you can use it like parametres 
 - sens = 600
 
 
-All these variables are used to calculate the humidity rate (RH%) we search. We can see their implementation in the "compt.vhd" block.
+All these variables are used to calculate the humidity rate (RH%) we search. 
 
-After all these settings, we have to simulate the true behaviour of the all the installation.
-First, we have to join all the Inputs/Outputs of the system like the picture just below.
 
 ![image](https://user-images.githubusercontent.com/82948794/121970491-f11d5b00-cd76-11eb-87ff-1a47bd5ff636.png)
 
