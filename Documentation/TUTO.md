@@ -108,7 +108,9 @@ Then, we get back to the sensor and see what it can bring us. We know that it st
 
 Then, we can go to the I2C driver. How does a I2C driver work ? First, we consider a driver by its state machine. This means that we implement lines that explain the behaviour of the FPGA and how it has to go step by step. The following picture is quite interesting to understand the work of the driver.
 
-![image](https://user-images.githubusercontent.com/82948794/121968052-d1cfff00-cd71-11eb-9160-18e511fa4ce0.png)
+![image](https://user-images.githubusercontent.com/82948794/122188590-6466c000-ce90-11eb-9e5c-fea19a2fda71.png)
+
+The explanation of how it runs is developed in this links : https://forum.digikey.com/t/i2c-master-vhdl/12797
 
 The I2C_M master code (driver I2C) say how we can change state and when it is possible. We thus know when we have to reset, when the bus is ready to write information on sda, when the machine is able to receive or send datas etc. We can see a part of the I2C driver given in Code VHDL Folder and called "I2C_M" just below.
 
