@@ -27,6 +27,7 @@ The Fout output give us a square signal of a frequency we doesn't know but wich 
 
 From that schematic, we will implement first the counter called "cmpt.vhd" that will return a value (counter) we will use later in the .C code named "codeC.c" 
 
+## cmpt ##
 
 As we have seen in the draw above, we have to use a high frequency clock of 1 MHz that will give us enough precision. But the basis clock is not at 1 MHz, so we have to divise the clock of the FPGA of 50 MHz into a clock of 1 MHz. We do that with a clock divider we can see in in our "cmpt.vhd" file.
 
@@ -62,6 +63,8 @@ end process;
 end entity;
 ```
 The rest of the code return us the counter with the same way that we explained before.
+
+## cmpt_TB ##
 
 After, we have to test this code with a "Test Bench". The Test Bench simulates the behaviour of the sensor in a case we choose and have to confirms our expectations.
 
@@ -99,11 +102,11 @@ end tb;
 
 That tests the counter and show us what we want : a value for the counter.
 
-Then, we get back to the sensor and see what it can bring us. We know that it still contains 2 important variables "offset" and "sensitivity" which are necessary to obtain the humidity rate. To attempt these values, we have to search in registries of the sensor the information we want. Then, we will do this search with an I2C protocol code named "I2C_M" that will extract "offset" and "sensitivity" and put them into registries we will use just after. 
+## I2C_M ##
 
-Then, we can go to the I2C driver. How work a I2C driver ? First, we consider a driver by its state machine. This means that we implement lines that explain the behaviour of the FPGA and how it has to go step by step. The following picture is quite interesting to understand the work of the driver.
+Then, we get back to the sensor and see what it can bring us. We know that it still contains 2 important variables "offset" and "sensitivity" which are necessary to obtain the humidity rate. To attempt these values, we have to search in registries of the sensor the information we want. Then, we will do this search with an I2C protocol code named "I2C_M" that will extract "offset" and "sensitivity" and put them into registries we will use just after. The I2C driver will find values of "offset" and "sensibility" that we could considered as constant before.
 
-The I2C driver will find values of "offset" and "sensibility" that we considered as constant before.
+Then, we can go to the I2C driver. How does a I2C driver work ? First, we consider a driver by its state machine. This means that we implement lines that explain the behaviour of the FPGA and how it has to go step by step. The following picture is quite interesting to understand the work of the driver.
 
 ![image](https://user-images.githubusercontent.com/82948794/121968052-d1cfff00-cd71-11eb-9160-18e511fa4ce0.png)
 
@@ -111,6 +114,9 @@ The I2C_M master code (driver I2C) say how we can change state and when it is po
 
 ![image](https://user-images.githubusercontent.com/82948794/121969260-30967800-cd74-11eb-952c-9be7ef9bdd36.png)
 
+## I2C_M_Test_Bench ##
+
+To test the I2C_M we found, we will do like in the previous 
 
 To end, we have put together all the previous important datas :
 - Counter
