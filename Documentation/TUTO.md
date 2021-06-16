@@ -7,10 +7,10 @@ We will start by discovering the sensor and its different outputs.
 
 ![image](https://user-images.githubusercontent.com/82948794/121933034-d4b4fa80-cd45-11eb-90df-b36d201fbf00.png)
 
-The HH10D humidity sensor is constitued by 3 real outputs : 
+The HH10D humidity sensor is constitued by 3 physical outputs : 
 
 - Fout : this output gives us a signal that we have to treat to extract a frequency we will need to compile humidity rate (RH%)
-- SDA : it concerns 2 datas that we have to extract : sensitivity and offset that are also needed to find RH% and we will read them with the I2C protocol.
+- SDA : the 2 datas that we have to extract will be by this bus : sensitivity and offset that are also needed to find RH% and we will read them with the I2C protocol.
 - SCL : concerns the main clock of the system in an I2C protocol
 
 All explanations about I2C protocol needed in the project are in this link : https://forum.digikey.com/t/i2c-master-vhdl/12797. It explains you the Master/Slave communication via I2C work and you will understand more it by look at our I2C_M in the section "State Machine". That describes all the same steps that is shown in the link.
@@ -26,6 +26,11 @@ The Fout output give us a square signal of a frequency we doesn't know but wich 
 
 
 From that schematic, we will implement first the counter called "cmpt.vhd" that will return a value (counter) we will use later in the .C code named "codeC.c" 
+
+The formula we have to implement in the end is (also given in datasheet) :
+
+![image](https://user-images.githubusercontent.com/82948794/122189819-8ad92b00-ce91-11eb-9310-c5823cb3dca6.png)
+
 
 ## cmpt ##
 
