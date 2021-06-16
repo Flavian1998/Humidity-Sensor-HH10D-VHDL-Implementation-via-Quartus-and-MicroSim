@@ -15,17 +15,18 @@ top-level entity correspond with the Test Bench
 Make sure that the Tool name is Modelsim-Altera
 -Compile: Make sure that there aren’t any errors
 -Go to Tools → Run Simulation Tools → RTL simulation
--Openning of Modelsim
--Go to Compile → Compile → Check his own Test Bench
+-Openning of ModelSim
+-Go to Compile → Compile all
+- Check his own Test Bench and if it runs
 -Go to Library Windows → work → our Test Bench → Architecture of
 our Test Bench
 -Objects Appearance
 -Select all the objects and add to a new wave
--Select the simulation time and run
+-Select a simulation time and run
 
 # How to put the .c code on FPGA ? #
 
 - Open Putty 
 - Connect the processor of the FPGA (USB port in device manager)
-- Upload the executable file given in DEO_my_first_fgpa in the command windows using "prompt"
-- On putty you can now read the .c code and see the humidity rate
+- Upload the executable file (folder of your project) in the command windows using "prompt"
+- On putty you can now read the .c code display and see the humidity rate
