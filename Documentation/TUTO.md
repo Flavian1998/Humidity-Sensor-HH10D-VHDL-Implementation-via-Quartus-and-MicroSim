@@ -193,6 +193,8 @@ If you cannot extract "offset" and "sensitivity" you can use it like parametres 
 
 All these variables are used to calculate the humidity rate (RH%) we search. 
 
+You can see a picture of our installation below and the presentation of it in the YouTube link present in the "readme".
+
 ![image](https://user-images.githubusercontent.com/82948794/122190344-033fec00-ce92-11eb-8d00-6229ecf7350d.png)
 
 
