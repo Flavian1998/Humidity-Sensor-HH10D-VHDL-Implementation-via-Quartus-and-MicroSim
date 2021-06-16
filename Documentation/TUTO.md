@@ -193,8 +193,7 @@ If you cannot extract "offset" and "sensitivity" you can use it like parametres 
 
 All these variables are used to calculate the humidity rate (RH%) we search. 
 
-
-![image](https://user-images.githubusercontent.com/82948794/121970491-f11d5b00-cd76-11eb-87ff-1a47bd5ff636.png)
+![image](https://user-images.githubusercontent.com/82948794/122190344-033fec00-ce92-11eb-8d00-6229ecf7350d.png)
 
 
 # How to use these previous code with my FPGA and my board ? #
