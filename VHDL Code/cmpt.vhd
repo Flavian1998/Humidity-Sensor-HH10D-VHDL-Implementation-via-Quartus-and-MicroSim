@@ -7,7 +7,7 @@ port (
   i_clk_ref            : in  std_logic;
   i_clk_test           : in  std_logic;
   i_rstb               : in  std_logic;
-  humidity         : out std_logic_vector(15 downto 0));
+  o_clock_freq        : out std_logic_vector(15 downto 0));
 end cmpt;
 
 architecture rtl of cmpt is
@@ -94,7 +94,7 @@ end process p_counter_test;
 p_counter_test_out : process (i_rstb,i_clk_test)
 begin
   if(i_rstb='0') then
-    humidity         <= (others=>'1');  -- set all bit to '1' at reset and if test clock is not present
+    o_clock_freq        <= (others=>'1');  -- set all bit to '1' at reset and if test clock is not present
   elsif(rising_edge(i_clk_test)) then
     if(r2_counter_test_strobe='1') then
 
@@ -125,7 +125,7 @@ begin
 
 		-- send humidity out
 
-		humidity <= humidity_vector;
+		o_clock_freq <= humidity_vector;
     end if;
   end if;
 end process p_counter_test_out;
