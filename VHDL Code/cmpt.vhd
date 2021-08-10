@@ -112,7 +112,7 @@ begin
 -- operations
 		r2_integer <= r2_integer*2; -- to have on n entire period
 		r2_integer <= r2_integer*1000; -- to avoid bad rounding
-		freq <= r2_integer/5000000; -- divide by clk_ref
+		freq <= 50000000/r2_integer; -- divide by clk_ref
 		freq <= freq/1000;
 		intermediate <= 7720 - freq; -- (offset - freq)
 		intermediate <= intermediate*379; -- (offset - freq)*sens
