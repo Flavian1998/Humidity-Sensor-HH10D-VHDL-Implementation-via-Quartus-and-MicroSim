@@ -34,7 +34,7 @@ signal freq : integer;
 signal intermediate : integer;
 signal humidity_int : integer;
 
-signal humidity_unsigned : unsigned(15 downto 0)
+signal humidity_unsigned : unsigned(15 downto 0);
 
 signal humidity_vector : std_logic_vector(15 downto 0);
 
@@ -53,7 +53,7 @@ begin
     -- use MSB to control test counter
     r1_counter_test_ena       <= not r1_counter_ref(r1_counter_ref'high);
 
-    -- enable storing for 1024 clock cycle after 256 clock cycle => on doit augmenter cette période de stockage (1024*1/(50*10^6) = 2*10^(-8)*1024 = 2.048*10^(-5) s = 20.48 us = 20480 ns ) parce qu'on veut compter sur une période de 100 us maximum
+    -- enable storing for 1024 clock cycle after 256 clock cycle => on doit augmenter cette p�riode de stockage (1024*1/(50*10^6) = 2*10^(-8)*1024 = 2.048*10^(-5) s = 20.48 us = 20480 ns ) parce qu'on veut compter sur une p�riode de 100 us maximum
     if(r1_counter_ref>16#1100#) and (r1_counter_ref<16#2500#) then
       r1_counter_test_strobe     <= '1';
     else
@@ -106,12 +106,12 @@ begin
 
 
 --convert counter r2 into integer to deal with operations
-		r2_unsigned <= unsigned(r2_counter_test)
-		r2_integer <= to_integer(r2_unsigned)
+		r2_unsigned <= r2_counter_test;
+		r2_integer <= to_integer(r2_unsigned);
 
 -- operations
 		r2_integer <= r2_integer*2; -- to have on n entire period
-		r2_integer <= r2_integer*1000 -- to avoid bad rounding
+		r2_integer <= r2_integer*1000; -- to avoid bad rounding
 		freq <= r2_integer/5000000; -- divide by clk_ref
 		freq <= freq/1000;
 		intermediate <= 7720 - freq; -- (offset - freq)
@@ -120,12 +120,12 @@ begin
 
 		-- return to vector
 
-		humidity_unsigned <= to_unsigned(humidity_int,15 downto 0);
+		humidity_unsigned <= to_unsigned(humidity_int, humidity_unsigned'length);
 		humidity_vector <= std_logic_vector(humidity_unsigned);
 
 		-- send humidity out
 
-		humidity <= std_logic_vector(humidity_vector );
+		humidity <= humidity_vector;
     end if;
   end if;
 end process p_counter_test_out;
